@@ -68,9 +68,9 @@ class PizzaController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Pizza $pizza)
     {
-        //
+        return view('pizzas.edit', compact('pizza'));
     }
 
     /**
@@ -80,9 +80,21 @@ class PizzaController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Pizza $pizza)
     {
-        //
+        $data = $request->all();
+
+        $pizza->name = $data['name'];
+        $pizza->description = $data['description'];
+        $pizza->price = $data['price'];
+
+        if(isset($data['vegetarian'])){
+            $pizza->vegetarian = true;
+        }
+        
+        $pizza->save();
+
+        return redirect()->route('pizzas.show',$pizza->id);
     }
 
     /**
