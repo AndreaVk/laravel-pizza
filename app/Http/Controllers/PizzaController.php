@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Pizza;
 
 class PizzaController extends Controller
 {
@@ -13,7 +14,8 @@ class PizzaController extends Controller
      */
     public function index()
     {
-        //
+        $pizzas = Pizza::all();
+        return view('home', compact('pizzas'));
     }
 
     /**
@@ -43,9 +45,9 @@ class PizzaController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Pizza $pizza)
     {
-        //
+        return view("pizzas.show", compact("pizza"));
     }
 
     /**
