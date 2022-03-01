@@ -14,5 +14,10 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', 'HomeController@index');
-Route::resource('pizzas', 'PizzaController');
+// Route::get('/', 'HomeController@index');
+// Route::resource('pizzas', 'PizzaController');
+
+
+Route::get("{any?}", function () {
+    return view("front");
+})->where("any", ".*");
